@@ -27,15 +27,17 @@ COPY . .
 # Inicializar Reflex (esto descarga las dependencias de Node y construye el frontend)
 RUN reflex init
 
-# Exportar la aplicación para producción
+# Exportar la aplicación para producción (genera frontend.zip)
 RUN reflex export --frontend-only
 
-# Exponer el puerto (Reflex usa el 3000 por defecto en producción)
-EXPOSE 3000
+# Descomprimir archivos estáticos en public/
+RUN unzip frontend.zip -d public && rm -f frontend.zip
+
+# Exponer el puerto
 EXPOSE 8000
 
 # Variables de entorno para producción
 ENV REFLEX_ENV=production
 
-# Comando para ejecutar la aplicación
-CMD ["reflex", "run", "--env", "prod", "--backend-only"]
+# Comando para servir los archivos estáticos desde public/
+CMD ["python", "-m", "http.server", "8000", "--directory", "public"]
