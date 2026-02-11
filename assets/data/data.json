@@ -1,128 +1,169 @@
 {
-    "title": "Thomas A. Anderson (Neo) | Portafolio",
-    "description": "Soy Neo, posiblemente el mejor programador de la historia.",
-    "image": "/avatar.jpg",
-    "avatar": "/avatar.jpg",
-    "name": "Thomas A. Anderson (Neo)",
-    "skill": "Programador, hacker y el Elegido",
-    "location": "Matrix y el mundo real",
+    "title": "Mauro Morales | Ingeniero en Software",
+    "description": "Ingeniero en Software con más de 6 años de experiencia en desarrollo Full Stack, liderazgo técnico y gestión de equipos en empresas de tecnología y startups.",
+    "image": "/Avatar.png",
+    "avatar": "/Avatar.png",
+    "name": "Mauro Morales",
+    "skill": "Ingeniero en Software | Full Stack Developer",
+    "location": "Huambaló, Ecuador",
     "media": {
-        "email": "neo@metacortex.com",
-        "cv": "/data/cv.pdf",
-        "github": "https://github.com/thomasanderson",
-        "likedin": "https://linkedin.com/in/thomasanderson"
+        "email": "majamoci@gmail.com",
+        "cv": "/data/CV MAURO MORALES 2026.pdf",
+        "github": "https://github.com/majamoci",
+        "likedin": "https://linkedin.com/in/majamoci"
     },
-    "about": "Soy un programador inquieto con una doble vida, ya que trabajo en una prestigiosa empresa de software pero también he cometido todos los crímenes informáticos que existen. Tengo la sensación de que nada es lo que parece ser.",
+    "about": "Profesional en tecnología con más de 6 años de experiencia en desarrollo de software y liderazgo de equipos técnicos en empresas de tecnología y startups. Gran afición por los retos nuevos y el aprendizaje continuo. Especializado en desarrollo Full Stack con JavaScript, TypeScript, Java y tecnologías cloud.",
     "technologies": [
         {
-            "icon": "devicon-devicon-plain",
-            "name": "Binario"
+            "icon": "devicon-javascript-plain",
+            "name": "JavaScript"
         },
         {
-            "icon": "devicon-devicon-plain",
-            "name": "Ensamblador"
+            "icon": "devicon-typescript-plain",
+            "name": "TypeScript"
         },
         {
-            "icon": "devicon-devicon-plain",
-            "name": "COBOL"
+            "icon": "devicon-react-original",
+            "name": "React"
         },
         {
-            "icon": "devicon-c-plain",
-            "name": "C"
+            "icon": "devicon-nodejs-plain",
+            "name": "Node.js"
+        },
+        {
+            "icon": "devicon-nextjs-plain",
+            "name": "Next.js"
+        },
+        {
+            "icon": "devicon-wordpress-plain",
+            "name": "Wordpress"
+        },
+        {
+            "icon": "devicon-spring-plain",
+            "name": "Spring Boot"
+        },
+        {
+            "icon": "devicon-postgresql-plain",
+            "name": "PostgreSQL"
+        },
+        {
+            "icon": "devicon-mongodb-plain",
+            "name": "MongoDB"
+        },
+        {
+            "icon": "devicon-docker-plain",
+            "name": "Docker"
         },
         {
             "icon": "devicon-python-plain",
             "name": "Python"
+        },
+        {
+            "icon": "devicon-googlecloud-plain",
+            "name": "GCP"
+        },
+        {
+            "icon": "devicon-html5-plain",
+            "name": "HTML5"
+        },
+        {
+            "icon": "devicon-css3-plain",
+            "name": "CSS3"
+        },
+        {
+            "icon": "devicon-git-plain",
+            "name": "Git"
         }
     ],
     "experience": [
         {
-            "icon": "terminal",
-            "title": "Metacortex",
-            "subtitle": "Programador",
-            "description": "Programo software respetable desde un cubículo.",
-            "date": "1999"
+            "icon": "briefcase",
+            "title": "CTO | Full Stack Developer",
+            "subtitle": "InQidea Soluciones Digitales",
+            "description": "Líder de proyectos tecnológicos para la empresa. Gestión de equipos de desarrollo tecnológico. Análisis de proyectos y elaboración de presupuestos.",
+            "date": "Ago 2022 - Actualidad"
         },
         {
-            "icon": "rabbit",
-            "title": "Nebuchadnezzar",
-            "subtitle": "El Elegido",
-            "description": "Me encargo de salvar el mundo.",
-            "date": "1999 - Actualidad"
+            "icon": "code",
+            "title": "Frontend Web Developer",
+            "subtitle": "Softradis",
+            "description": "Diseño y maquetación de interfaces y experiencia de usuario con Figma. Desarrollo de páginas web en HTML5 y CSS3 con Angular. Colaboración en la creación de un curso de Frontend Developer para Udemy.",
+            "date": "Sep 2021 - Jul 2022"
+        },
+        {
+            "icon": "bug",
+            "title": "QA Tester - Developer Jr",
+            "subtitle": "Tecnopreven S.L.",
+            "description": "Control de calidad del software de Prevención de Riesgos Laborales. Testing manual y documentación. Mejora continua de la plataforma junto al equipo de desarrollo. Implementación de funcionalidades con Java Struts.",
+            "date": "Oct 2020 - Abr 2021"
         }
     ],
     "projects": [
         {
-            "icon": "bar-chart-4",
-            "title": "Software random",
-            "subtitle": "Software propiedad de Metacortex",
-            "description": "Herramienta para hacer rico a otras personas.",
+            "icon": "rocket",
+            "title": "Plataformas Web Empresariales",
+            "subtitle": "InQidea Soluciones Digitales",
+            "description": "Desarrollo de soluciones empresariales completas con arquitectura moderna, integración de servicios cloud y despliegue en infraestructura escalable.",
             "technologies": [
                 {
-                    "icon": "devicon-python-plain",
-                    "name": "Python"
+                    "icon": "devicon-react-original",
+                    "name": "React"
                 },
                 {
-                    "icon": "devicon-django-plain",
-                    "name": "Django"
-                }
-            ],
-            "image": "/project_1.jpg",
-            "url": "https://matrix.fandom.com/wiki/MetaCortex",
-            "github": "https://github.com/thomasanderson"
-        },
-        {
-            "icon": "bug-off",
-            "title": "Hackeo Matrix",
-            "subtitle": "Mi obra maestra",
-            "description": "Migración del Matrix al mundo real y hackeo del sistema ficticio para salvar a la humanidad.",
-            "technologies": [
+                    "icon": "devicon-nodejs-plain",
+                    "name": "Node.js"
+                },
                 {
-                    "icon": "devicon-devicon-plain",
-                    "name": "Binario"
+                    "icon": "devicon-typescript-plain",
+                    "name": "TypeScript"
+                },
+                {
+                    "icon": "devicon-googlecloud-plain",
+                    "name": "GCP"
+                },
+                {
+                    "icon": "devicon-docker-plain",
+                    "name": "Docker"
+                },
+                {
+                    "icon": "devicon-wordpress-plain",
+                    "name": "Wordpress"
                 }
-            ],
-            "image": "/project_2.jpg",
-            "url": "https://matrix.fandom.com/wiki/Wiki",
-            "github": "https://github.com/thomasanderson"
+            ]
         }
     ],
     "training": [
         {
-            "icon": "backpack",
-            "title": "Central West Junior High",
-            "subtitle": "Una escuela",
-            "description": "Aprendí cosas.",
-            "date": "Indeterminado",
-            "certificate": "https://en.wikipedia.org/wiki/Neo_(The_Matrix)"
+            "icon": "graduation-cap",
+            "title": "Ingeniería en Software",
+            "subtitle": "Universidad de las Fuerzas Armadas ESPE",
+            "description": "Título universitario en Ingeniería de Software con enfoque en desarrollo de aplicaciones, arquitectura de software y gestión de proyectos tecnológicos.",
+            "date": "2023",
+            "certificate": "https://www.espe.edu.ec"
         },
         {
-            "icon": "graduation-cap",
-            "title": "Owen Patterson High",
-            "subtitle": "Otra escuela",
-            "description": "Aprendí más cosas.",
-            "date": "Indeterminado",
-            "certificate": "https://en.wikipedia.org/wiki/Neo_(The_Matrix)"
+            "icon": "code",
+            "title": "Frontend Developer",
+            "subtitle": "Platzi",
+            "description": "Certificación completa en desarrollo frontend, incluyendo HTML, CSS, JavaScript, frameworks modernos y mejores prácticas de desarrollo web.",
+            "date": "2021",
+            "certificate": "https://platzi.com/p/majamoci/curso/1640-frontend-developer-2019/diploma/detalle/"
+        },
+        {
+            "icon": "users",
+            "title": "Scrum Master Profesional",
+            "subtitle": "CertiProf",
+            "description": "Certificación profesional en metodologías ágiles Scrum, gestión de equipos y liderazgo de proyectos tecnológicos.",
+            "date": "2021",
+            "certificate": "https://verify.certiprof.com/certificado/TLLZSHKLGL-HMTPHMTH-RPDFFSPRHJ"
         }
     ],
     "extras": [
         {
-            "image": "/extra_1.jpg",
-            "title": "The Matrix",
-            "description": "Aparecí en esta película.",
-            "url": "https://en.wikipedia.org/wiki/The_Matrix"
-        },
-        {
-            "image": "/extra_2.jpg",
-            "title": "The Matrix Reloaded",
-            "description": "Y en esta otra.",
-            "url": "https://en.wikipedia.org/wiki/The_Matrix_Reloaded"
-        },
-        {
-            "image": "/extra_3.jpg",
-            "title": "The Matrix Revolutions",
-            "description": "Y en esta más.",
-            "url": "https://en.wikipedia.org/wiki/The_Matrix_Revolutions"
+            "image": "/springer-ccn.webp",
+            "title": "Publicación Científica en Springer",
+            "description": "Application of Convolutional Neural Networks for the Detection of Diseases in the CCN-51 Cocoa Fruit by Means of a Mobile Application.",
+            "url": "https://link.springer.com/chapter/10.1007/978-3-031-47100-1_1"
         }
     ]
 }
