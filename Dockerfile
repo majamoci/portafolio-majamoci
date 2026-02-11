@@ -7,6 +7,7 @@ WORKDIR /app
 # Instalar dependencias del sistema necesarias para Reflex
 RUN apt-get update && apt-get install -y \
     curl \
+    unzip \
     nodejs \
     npm \
     ca-certificates \
