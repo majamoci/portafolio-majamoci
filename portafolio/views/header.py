@@ -9,6 +9,7 @@ def header(data: Data) -> rx.Component:
     return rx.hstack(
         rx.avatar(
             src=data.avatar,
+            alt=f"Foto de perfil de {data.name}",
             size=Size.BIG.value
         ),
         rx.vstack(

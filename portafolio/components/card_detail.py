@@ -12,6 +12,7 @@ def card_detail(extra: Extra) -> rx.Component:
                 rx.inset(
                     rx.image(
                         src=extra.image,
+                        alt=extra.title,
                         height=IMAGE_HEIGHT,
                         width="100%",
                         object_fit="cover"
@@ -43,6 +44,7 @@ def card_detail(extra: Extra) -> rx.Component:
             rx.inset(
                 rx.image(
                     src=extra.image,
+                    alt=extra.title,
                     height=IMAGE_HEIGHT,
                     width="100%",
                     object_fit="cover"

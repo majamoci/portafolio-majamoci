@@ -9,6 +9,7 @@ from portafolio.views.info import info
 from portafolio.views.tech_stack import tech_stack
 
 DATA = data.data
+SITE_URL = "https://majamoci.dev"
 
 
 def index() -> rx.Component:
@@ -52,10 +53,23 @@ app.add_page(
     index,
     title=title,
     description=description,
-    image=image,
+    image=f"{SITE_URL}{image}",
     meta=[
-        {"name": "og:title", "content": title},
-        {"name": "og:description", "content": description},
-        {"name": "og:image", "content": image}
+        # Open Graph tags
+        {"property": "og:type", "content": "website"},
+        {"property": "og:title", "content": title},
+        {"property": "og:description", "content": description},
+        {"property": "og:image", "content": f"{SITE_URL}{image}"},
+        {"property": "og:url", "content": f"{SITE_URL}/"},
+        {"property": "og:locale", "content": "es_EC"},
+        {"property": "og:site_name", "content": f"{DATA.name} - Portafolio"},
+        # Twitter Card tags
+        {"name": "twitter:card", "content": "summary_large_image"},
+        {"name": "twitter:title", "content": title},
+        {"name": "twitter:description", "content": description},
+        {"name": "twitter:image", "content": f"{SITE_URL}{image}"},
+        # SEO adicional
+        {"name": "robots", "content": "index, follow"},
+        {"name": "author", "content": DATA.name},
     ]
 )
