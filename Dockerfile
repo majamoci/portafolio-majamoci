@@ -1,5 +1,5 @@
-# Dockerfile para Portafolio Reflex - Despliegue Estático
-FROM python:3.12-slim as builder
+# Dockerfile para Portafolio Reflex - Despliegue con Backend
+FROM python:3.12-slim
 
 # Establecer directorio de trabajo
 WORKDIR /app
@@ -28,34 +28,15 @@ RUN uv venv && uv pip install -r pyproject.toml
 # Copiar todo el código de la aplicación
 COPY . .
 
-# Inicializar Reflex y exportar sin SSR
-RUN uv run reflex init && \
-    uv run reflex export --frontend-only --no-ssr --no-zip
+# Inicializar Reflex (esto instala dependencias de Node y compila frontend)
+RUN uv run reflex init
 
-# Imagen final ligera solo con archivos estáticos
-FROM nginx:alpine
+# Exponer puertos (3000 para frontend, 8000 para backend)
+EXPOSE 3000 8000
 
-# Copiar archivos estáticos al directorio de nginx
-COPY --from=builder /app/.web/build/client /usr/share/nginx/html
+# Variables de entorno para producción
+ENV REFLEX_ENV=production
+ENV REFLEX_BACKEND_ONLY=false
 
-# Configuración de nginx para SPA
-RUN echo 'server { \
-    listen 80; \
-    server_name _; \
-    root /usr/share/nginx/html; \
-    index index.html; \
-    location / { \
-        try_files $uri $uri/ /index.html =404; \
-        add_header Cache-Control "no-cache"; \
-    } \
-    location /assets/ { \
-        expires 1y; \
-        add_header Cache-Control "public, immutable"; \
-    } \
-}' > /etc/nginx/conf.d/default.conf
-
-# Exponer el puerto
-EXPOSE 80
-
-# Nginx se ejecuta automáticamente
-CMD ["nginx", "-g", "daemon off;"]
+# Comando para ejecutar Reflex en modo producción
+CMD ["uv", "run", "reflex", "run", "--env", "prod", "--backend-host", "0.0.0.0", "--frontend-host", "0.0.0.0"]
