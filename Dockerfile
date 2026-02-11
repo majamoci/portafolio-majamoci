@@ -41,9 +41,9 @@ RUN uv run reflex init && \
 # Copiar frontend compilado a Nginx
 RUN cp -r .web/build/client/* /var/www/html/
 
-# Copiar archivos SEO (robots.txt y sitemap.xml) desde el workspace
-RUN cp /app/public/robots.txt /var/www/html/robots.txt && \
-    cp /app/public/sitemap.xml /var/www/html/sitemap.xml
+# Crear archivos SEO directamente
+RUN printf 'User-agent: *\nAllow: /\n\nSitemap: https://majamoci.dev/sitemap.xml\n' > /var/www/html/robots.txt && \
+    printf '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  <url>\n    <loc>https://majamoci.dev/</loc>\n    <lastmod>2026-02-11</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>1.0</priority>\n  </url>\n</urlset>\n' > /var/www/html/sitemap.xml
 
 # Ejecutar script post-build para inyectar meta tags SEO y JSON-LD en el HTML
 RUN python3 post-build-seo.py /var/www/html/index.html
