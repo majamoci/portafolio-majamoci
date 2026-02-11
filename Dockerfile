@@ -1,15 +1,16 @@
-# Dockerfile para Portafolio Reflex - Despliegue con Backend
+# Dockerfile para Portafolio Reflex - Backend + Nginx Proxy
 FROM python:3.12-slim
 
 # Establecer directorio de trabajo
 WORKDIR /app
 
-# Instalar dependencias del sistema necesarias para Reflex
+# Instalar dependencias del sistema necesarias para Reflex + Nginx
 RUN apt-get update && apt-get install -y \
     curl \
     unzip \
     nodejs \
     npm \
+    nginx \
     ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 
@@ -28,15 +29,22 @@ RUN uv venv && uv pip install -r pyproject.toml
 # Copiar todo el código de la aplicación
 COPY . .
 
-# Inicializar Reflex (esto instala dependencias de Node y compila frontend)
-RUN uv run reflex init
+# Configurar Nginx (eliminar default, usar nuestro config)
+RUN rm -f /etc/nginx/sites-enabled/default && \
+    mkdir -p /var/www/html && \
+    cp nginx.conf /etc/nginx/conf.d/default.conf
 
-# Exponer puertos (3000 para frontend, 8000 para backend)
-EXPOSE 3000 8000
+# Inicializar Reflex y exportar frontend estático
+RUN uv run reflex init && \
+    uv run reflex export --frontend-only --no-zip
 
-# Variables de entorno para producción
-ENV REFLEX_ENV=production
-ENV REFLEX_BACKEND_ONLY=false
+# Copiar frontend compilado a Nginx
+RUN cp -r .web/build/client/* /var/www/html/
 
-# Comando para ejecutar Reflex en modo producción
-CMD ["uv", "run", "reflex", "run", "--env", "prod", "--backend-host", "0.0.0.0", "--backend-port", "8000", "--loglevel", "warning"]
+# Script de inicio
+RUN chmod +x /start.sh
+
+# Solo exponemos puerto 80 (Nginx maneja todo)
+EXPOSE 80
+
+CMD ["/start.sh"]
