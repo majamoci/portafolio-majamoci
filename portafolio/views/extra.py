@@ -8,24 +8,16 @@ from portafolio.styles.styles import Size
 def extra(extras: list[Extra]) -> rx.Component:
     return rx.vstack(
         heading("Extra"),
-        rx.mobile_only(
-            rx.vstack(
-                *[
-                    card_detail(extra)
-                    for extra in extras
-                ],
-                spacing=Size.DEFAULT.value
-            ),
-            width="100%"
-        ),
-        rx.tablet_and_desktop(
-            rx.grid(
-                *[
-                    card_detail(extra)
-                    for extra in extras
-                ],
-                spacing=Size.DEFAULT.value,
-                columns="3"
+        rx.grid(
+            *[
+                card_detail(extra)
+                for extra in extras
+            ],
+            spacing=Size.DEFAULT.value,
+            columns=rx.breakpoints(
+                initial="1",
+                sm="2",
+                md="3"
             ),
             width="100%"
         ),
