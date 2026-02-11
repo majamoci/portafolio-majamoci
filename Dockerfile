@@ -41,9 +41,9 @@ RUN uv run reflex init && \
 # Copiar frontend compilado a Nginx
 RUN cp -r .web/build/client/* /var/www/html/
 
-# Copiar archivos SEO (robots.txt y sitemap.xml) directamente
-COPY public/robots.txt /var/www/html/robots.txt
-COPY public/sitemap.xml /var/www/html/sitemap.xml
+# Copiar archivos SEO (robots.txt y sitemap.xml) desde el workspace
+RUN cp /app/public/robots.txt /var/www/html/robots.txt && \
+    cp /app/public/sitemap.xml /var/www/html/sitemap.xml
 
 # Ejecutar script post-build para inyectar meta tags SEO y JSON-LD en el HTML
 RUN python3 post-build-seo.py /var/www/html/index.html
