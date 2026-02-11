@@ -42,9 +42,9 @@ RUN uv run reflex init && \
 RUN cp -r .web/build/client/* /var/www/html/
 
 # Script de inicio
-RUN chmod +x /start.sh
+RUN chmod +x /app/start.sh
 
 # Solo exponemos puerto 80 (Nginx maneja todo)
 EXPOSE 80
 
-CMD ["/start.sh"]
+CMD ["/app/start.sh"]
