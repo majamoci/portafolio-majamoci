@@ -35,6 +35,7 @@ def build_meta_tags(data):
     <meta name="description" content="{description}"/>
     <meta name="author" content="{data['name']}"/>
     <link rel="canonical" href="{SITE_URL}/"/>
+    <link rel="icon" type="image/png" href="/favicon.png"/>
 
     <!-- Open Graph -->
     <meta property="og:type" content="website"/>

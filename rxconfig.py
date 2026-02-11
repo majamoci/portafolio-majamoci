@@ -5,4 +5,5 @@ config = rx.Config(
     disable_plugins=["reflex.plugins.sitemap.SitemapPlugin"],
     overlay_component=None,
     show_built_with_reflex=False,
+    favicon="/favicon.png",
 )
