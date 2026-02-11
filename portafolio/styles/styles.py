@@ -26,5 +26,11 @@ STYLESHEETS = [
 BASE_STYLE = {
     rx.button: {
         "--cursor-button": "pointer"
+    },
+    ":root": {
+        "--cyan-9": "#00A4D9",
+        "--cyan-10": "#0090C0",
+        "--cyan-11": "#00A4D9",
+        "--cyan-12": "#E0F7FF"
     }
 }

@@ -1,5 +1,10 @@
 # Portafolio "perfecto" para programadores
 
+> **⚡ SITIO 100% ESTÁTICO - SOLO FRONTEND**  
+> Este proyecto se despliega como **archivos HTML/CSS/JS puros**.  
+> **NO requiere** backend, servidor Python, base de datos ni websockets en producción.  
+> **Despliegue con Docker** en cualquier plataforma (Dokploy, VPS, Cloud).
+
 [![Python](https://img.shields.io/badge/Python-3.12+-yellow?style=for-the-badge&logo=python&logoColor=white&labelColor=101010)](https://python.org)
 [![Reflex](https://img.shields.io/badge/Reflex-0.8.26+-5646ED?style=for-the-badge&logo=reflex&logoColor=white&labelColor=101010)](https://reflex.dev)
 
@@ -88,13 +93,21 @@ Principalmente puedes configurar el contenido y el aspecto gráfico del sitio we
 
 ## Despliegue
 
-![Vercel](https://img.shields.io/github/stars/vercel/vercel?label=Vercel&style=social)
+El proyecto genera archivos estáticos listos para desplegar en cualquier hosting.
 
-El proyecto utiliza [Vercel](https://vercel.com) como hosting de recursos estáticos.
+Genera los archivos ejecutando:
 
-Se configura el despliegue automático desde los archivos [vercel.json](./vercel.json) y [build.sh](./build.sh).
+```bash
+./build.sh
+```
 
-Aquí tienes la [demo](https://portafoliotemplate.dev/).
+Los archivos generados en `public/` pueden desplegarse en:
+- **Dokploy**: Deployment automático con Docker desde GitHub (Recomendado)
+- **Docker**: Usando el Dockerfile incluido en cualquier VPS o Cloud
+- **GitHub Pages**: Hosting gratuito de GitHub
+- **Cualquier servidor de archivos estáticos**
+
+Consulta [DOCKER_DEPLOY.md](./DOCKER_DEPLOY.md) para instrucciones detalladas de Dokploy.
 
 ## Curso de Python desde cero
 ### Aprende Python desde sus fundamentos

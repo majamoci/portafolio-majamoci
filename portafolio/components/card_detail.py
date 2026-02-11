@@ -16,7 +16,8 @@ def card_detail(extra: Extra) -> rx.Component:
                         width="100%",
                         object_fit="cover"
                     ),
-                    pb=Size.DEFAULT.value
+                    side="top",
+                    pb="0"
                 ),
                 rx.text.strong(extra.title),
                 rx.text(
@@ -46,7 +47,8 @@ def card_detail(extra: Extra) -> rx.Component:
                     width="100%",
                     object_fit="cover"
                 ),
-                pb=Size.DEFAULT.value
+                side="top",
+                pb="0"
             ),
             rx.text.strong(extra.title),
             rx.text(

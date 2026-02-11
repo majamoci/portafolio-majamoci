@@ -1,0 +1,24 @@
+import reflex as rx
+from reflex.style import set_color_mode, color_mode
+
+
+def dark_mode_toggle() -> rx.Component:
+    return rx.segmented_control.root(
+        # rx.segmented_control.item(
+        #     rx.icon(tag="monitor", size=20),
+        #     value="system",
+        # ),
+        rx.segmented_control.item(
+            rx.icon(tag="sun", size=20),
+            value="light",
+        ),
+        rx.segmented_control.item(
+            rx.icon(tag="moon", size=20),
+            value="dark",
+        ),
+        on_change=set_color_mode,
+        variant="surface",
+        radius="large",
+        value=color_mode,
+        size="2",
+    )

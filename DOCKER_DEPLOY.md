@@ -1,4 +1,7 @@
-# Guía de Despliegue con Docker y Dokploy
+# Guía de Despliegue - Sitio Estático (Solo Frontend)
+
+> **⚠️ IMPORTANTE**: Este portafolio es un **sitio completamente estático** sin backend.
+> No requiere servidor Python ni base de datos en producción, solo archivos HTML/CSS/JS.
 
 ## Despliegue Local con Docker
 
@@ -9,27 +12,24 @@ docker build -t portafolio-majamoci .
 
 ### Ejecutar el contenedor
 ```bash
-docker run -p 3000:3000 -p 8000:8000 portafolio-majamoci
+docker run -p 80:80 portafolio-majamoci
 ```
 
-La aplicación estará disponible en `http://localhost:3000`
+La aplicación estará disponible en `http://localhost`
 
-## Despliegue en Dokploy
+## Despliegue en Dokploy (Recomendado)
 
-### Opción 1: Desde Repositorio Git
+### Dokploy con Docker
 
+#### Opción 1: Desde Repositorio Git
 1. En Dokploy, crea un nuevo proyecto
 2. Selecciona "From Git Repository"
 3. Conecta tu repositorio de GitHub
 4. Dokploy detectará automáticamente el `Dockerfile`
-5. Configura los puertos:
-   - Puerto Frontend: 3000
-   - Puerto Backend: 8000
+5. Configura el puerto: **80**
 6. Despliega
 
-### Opción 2: Desde Docker Hub
-
-#### Paso 1: Subir imagen a Docker Hub
+#### Opción 2: Desde Docker Hub
 ```bash
 # Login en Docker Hub
 docker login
@@ -41,46 +41,47 @@ docker tag portafolio-majamoci tu-usuario/portafolio-majamoci:latest
 docker push tu-usuario/portafolio-majamoci:latest
 ```
 
-#### Paso 2: Desplegar en Dokploy
-1. En Dokploy, crea un nuevo proyecto
-2. Selecciona "From Docker Image"
-3. Ingresa: `tu-usuario/portafolio-majamoci:latest`
-4. Configura los puertos:
-   - Puerto Frontend: 3000
-   - Puerto Backend: 8000
-5. Despliega
+Luego en Dokploy:
+1. Selecciona "From Docker Image"
+2. Ingresa: `tu-usuario/portafolio-majamoci:latest`
+3. Puerto: **80**
+4. Despliega
 
-## Variables de Entorno (Opcional)
+## Personalización del Contenido
 
-Si necesitas configurar variables de entorno, añádelas en Dokploy:
-
-```env
-REFLEX_ENV=production
-```
-
-## Personalización
-
-Para actualizar tu información personal, edita el archivo:
+Para actualizar tu información personal, edita:
 ```
 assets/data/data.json
 ```
 
-Luego reconstruye y despliega nuevamente.
+Luego reconstruye y despliega:
+```bash
+./build.sh
+# O reconstruir Docker
+docker build -t portafolio-majamoci .
+```
 
 ## Solución de Problemas
 
-### El puerto 3000 ya está en uso
+### El puerto 80 ya está en uso (Docker)
 ```bash
-# Detener todos los contenedores
-docker stop $(docker ps -q)
-
-# O cambiar el puerto de mapeo
-docker run -p 8080:3000 -p 8001:8000 portafolio-majamoci
+# Cambiar el puerto de mapeo
+docker run -p 8080:80 portafolio-majamoci
 ```
 
 ### Reconstruir sin caché
 ```bash
 docker build --no-cache -t portafolio-majamoci .
+```
+
+### Error de permisos en build.sh
+```bash
+chmod +x build.sh
+```
+
+### Ver logs del contenedor
+```bash
+docker logs -f <container_id>
 ```
 
 ## Desarrollo Local (sin Docker)
@@ -94,7 +95,7 @@ docker build --no-cache -t portafolio-majamoci .
 curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
-### Ejecutar aplicación
+### Ejecutar aplicación en modo desarrollo
 ```bash
 # Instalar dependencias
 uv sync
@@ -102,14 +103,63 @@ uv sync
 # Inicializar Reflex
 uv run reflex init
 
-# Ejecutar en modo desarrollo
+# Ejecutar en modo desarrollo (con hot reload)
 uv run reflex run
 ```
 
 La aplicación estará en `http://localhost:3000`
 
+### Generar build de producción local
+```bash
+# Generar archivos estáticos
+./build.sh
+
+# Probar el build localmente
+cd public && python3 -m http.server 8000
+```
+
 ## Stack Técnico
+
+### Desarrollo
 - **Python**: 3.12+
-- **Reflex**: 0.8.26+
+- **Reflex**: 0.8.26+ (solo para generar el frontend)
 - **Gestor de Paquetes**: uv
 - **Node.js**: Latest (para compilación de frontend)
+
+### Producción (lo que se despliega)
+- **HTML/CSS/JavaScript**: Archivos estáticos compilados
+- **No requiere**: Backend, base de datos, servidor Python
+- **Servido por**: Nginx (Docker) o cualquier servidor de archivos estáticos
+
+## Arquitectura
+
+```
+┌─────────────────────┐
+│  Código Python      │ (Solo en desarrollo)
+│  (Reflex)           │
+└──────────┬──────────┘
+           │
+           │ uv run reflex export
+           │ (compilación)
+           ▼
+┌─────────────────────┐
+│  Archivos Estáticos │ ← Esto se despliega
+│  HTML/CSS/JS        │
+└─────────────────────┘
+           │
+           │ nginx / servidor estático
+           ▼
+┌─────────────────────┐
+│  Usuario / Browser  │
+└─────────────────────┘
+```
+
+## Ventajas del Despliegue Estático
+
+✅ **Sin servidor Python en producción**  
+✅ **Sin base de datos**  
+✅ **Sin websockets**  
+✅ **Despliegue con Docker** (Dokploy, VPS, Cloud)  
+✅ **Carga ultra-rápida**  
+✅ **Costos mínimos**  
+✅ **Alta disponibilidad** ✅ **Fácil escalabilidad**
