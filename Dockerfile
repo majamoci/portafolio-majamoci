@@ -39,4 +39,4 @@ ENV REFLEX_ENV=production
 ENV REFLEX_BACKEND_ONLY=false
 
 # Comando para ejecutar Reflex en modo producción
-CMD ["uv", "run", "reflex", "run", "--env", "prod", "--backend-host", "0.0.0.0", "--frontend-host", "0.0.0.0"]
+CMD ["uv", "run", "reflex", "run", "--env", "prod", "--backend-host", "0.0.0.0", "--backend-port", "8000", "--loglevel", "warning"]
