@@ -85,15 +85,31 @@ docker build --no-cache -t portafolio-majamoci .
 
 ## Desarrollo Local (sin Docker)
 
+### Requisitos
+- Python 3.12+
+- uv (gestor de paquetes rápido)
+
+### Instalación de uv
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
+### Ejecutar aplicación
 ```bash
 # Instalar dependencias
-pip install -r requirements.txt
+uv sync
 
 # Inicializar Reflex
-reflex init
+uv run reflex init
 
 # Ejecutar en modo desarrollo
-reflex run
+uv run reflex run
 ```
 
 La aplicación estará en `http://localhost:3000`
+
+## Stack Técnico
+- **Python**: 3.12+
+- **Reflex**: 0.8.26+
+- **Gestor de Paquetes**: uv
+- **Node.js**: Latest (para compilación de frontend)

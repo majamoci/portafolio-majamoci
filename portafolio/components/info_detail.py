@@ -18,7 +18,7 @@ def info_detail(info: Info) -> rx.Component:
                     color_scheme="gray"
                 ),
                 rx.cond(
-                    info.technologies,
+                    len(info.technologies) > 0,
                     rx.flex(
                         *[
                             rx.badge(
@@ -34,14 +34,14 @@ def info_detail(info: Info) -> rx.Component:
                 ),
                 rx.hstack(
                     rx.cond(
-                        info.url != "",
+                        len(info.url) > 0,
                         icon_button(
                             "link",
                             info.url
                         )
                     ),
                     rx.cond(
-                        info.github != "",
+                        len(info.github) > 0,
                         icon_button(
                             "github",
                             info.github
@@ -55,7 +55,7 @@ def info_detail(info: Info) -> rx.Component:
             width="100%"
         ),
         rx.cond(
-            info.image != "",
+            len(info.image) > 0,
             rx.image(
                 src=info.image,
                 height=IMAGE_HEIGHT,
@@ -66,11 +66,11 @@ def info_detail(info: Info) -> rx.Component:
         ),
         rx.vstack(
             rx.cond(
-                info.date != "",
+                len(info.date) > 0,
                 rx.badge(info.date)
             ),
             rx.cond(
-                info.certificate != "",
+                len(info.certificate) > 0,
                 icon_button(
                     "shield-check",
                     info.certificate,

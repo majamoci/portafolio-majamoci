@@ -1,7 +1,7 @@
 # Portafolio "perfecto" para programadores
 
-[![Python](https://img.shields.io/badge/Python-3.11+-yellow?style=for-the-badge&logo=python&logoColor=white&labelColor=101010)](https://python.org)
-[![Reflex](https://img.shields.io/badge/Reflex-0.4.5+-5646ED?style=for-the-badge&logo=reflex&logoColor=white&labelColor=101010)](https://reflex.dev)
+[![Python](https://img.shields.io/badge/Python-3.12+-yellow?style=for-the-badge&logo=python&logoColor=white&labelColor=101010)](https://python.org)
+[![Reflex](https://img.shields.io/badge/Reflex-0.8.26+-5646ED?style=for-the-badge&logo=reflex&logoColor=white&labelColor=101010)](https://reflex.dev)
 
 [![HTML](https://img.shields.io/badge/HTML-orange?style=for-the-badge&logo=html5&logoColor=white&labelColor=101010)](https://developer.mozilla.org/es/docs/Web/HTML)
 [![CSS](https://img.shields.io/badge/CSS-blue?style=for-the-badge&logo=css3&logoColor=white&labelColor=101010)](https://developer.mozilla.org/es/docs/Web/CSS)
@@ -49,13 +49,29 @@ Plantilla web para programadores desarrollada con la premisa de crear el "portaf
 
 Puedes seguir la [guía oficial](https://reflex.dev/docs/getting-started/installation/) de Reflex.
 
-Clona el proyecto, crea un entorno virtual, instala Reflex y ejecútalo para acceder al proyecto desde [http://localhost:3000](http://localhost:3000).
+### Requisitos
+* Python 3.12+
+* uv (gestor de paquetes rápido)
 
-`pip install reflex`
+### Instalación de uv
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
 
-`reflex init`
+Clona el proyecto e instala las dependencias:
 
-`reflex run`
+```bash
+# Sincronizar dependencias
+uv sync
+
+# Inicializar Reflex
+uv run reflex init
+
+# Ejecutar en modo desarrollo
+uv run reflex run
+```
+
+Accede al proyecto desde [http://localhost:3000](http://localhost:3000).
 
 ## Configuración
 

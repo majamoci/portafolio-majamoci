@@ -1,5 +1,5 @@
 # Dockerfile para Portafolio Reflex - Dokploy
-FROM python:3.11-slim
+FROM python:3.12-slim
 
 # Establecer directorio de trabajo
 WORKDIR /app
@@ -15,20 +15,25 @@ RUN apt-get update && apt-get install -y \
 # Actualizar npm a la última versión
 RUN npm install -g npm@latest
 
-# Copiar archivos de requisitos
-COPY requirements.txt .
+# Instalar uv para gestión rápida de paquetes
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /usr/local/bin/uv
 
-# Instalar dependencias de Python
-RUN pip install --no-cache-dir -r requirements.txt
+# Copiar archivos de configuración del proyecto
+COPY pyproject.toml .
+COPY .python-version .
+
+# Crear entorno virtual e instalar dependencias
+RUN uv venv && \
+    uv pip install -r pyproject.toml
 
 # Copiar todo el código de la aplicación
 COPY . .
 
 # Inicializar Reflex (esto descarga las dependencias de Node y construye el frontend)
-RUN reflex init
+RUN uv run reflex init
 
 # Exportar la aplicación para producción (genera frontend.zip)
-RUN reflex export --frontend-only
+RUN uv run reflex export --frontend-only
 
 # Descomprimir archivos estáticos en public/
 RUN unzip frontend.zip -d public && rm -f frontend.zip

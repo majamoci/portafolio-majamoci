@@ -1,6 +1,50 @@
-*.db
-*.py[cod]
-.venv
+# Reflex
+.states
 .web
-__pycache__/
 public/
+assets/external/
+
+# Python
+*.py[cod]
+__pycache__/
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Virtual environments
+.venv
+venv/
+ENV/
+env/
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Logs
+*.log
+
+# Environment variables
+.env
+.env.local
+
+# UV
+uv.lock
+
+# Temporary files
+*.tmp
+.cache/

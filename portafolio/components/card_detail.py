@@ -6,7 +6,7 @@ from portafolio.styles.styles import IMAGE_HEIGHT, Size
 
 def card_detail(extra: Extra) -> rx.Component:
     return rx.cond(
-        extra.url != "",
+        len(extra.url) > 0,
         rx.link(
             rx.card(
                 rx.inset(
