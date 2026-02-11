@@ -32,5 +32,8 @@ BASE_STYLE = {
         "--cyan-10": "#0090C0",
         "--cyan-11": "#00A4D9",
         "--cyan-12": "#E0F7FF"
+    },
+    ".rt-Flex": {
+        "justify-content": "center"
     }
 }
