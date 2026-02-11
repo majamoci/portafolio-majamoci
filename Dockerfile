@@ -1,5 +1,5 @@
-# Dockerfile para Portafolio Reflex - Dokploy
-FROM python:3.12-slim
+# Dockerfile para Portafolio Reflex - Despliegue Estático
+FROM python:3.12-slim as builder
 
 # Establecer directorio de trabajo
 WORKDIR /app
@@ -7,42 +7,54 @@ WORKDIR /app
 # Instalar dependencias del sistema necesarias para Reflex
 RUN apt-get update && apt-get install -y \
     curl \
-    unzip \
     nodejs \
     npm \
+    ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 
-# Actualizar npm a la última versión
+# Actualizar npm
 RUN npm install -g npm@latest
 
 # Instalar uv para gestión rápida de paquetes
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /usr/local/bin/uv
 
 # Copiar archivos de configuración del proyecto
-COPY pyproject.toml .
-COPY .python-version .
+COPY pyproject.toml .python-version ./
 
 # Crear entorno virtual e instalar dependencias
-RUN uv venv && \
-    uv pip install -r pyproject.toml
+RUN uv venv && uv pip install -r pyproject.toml
 
 # Copiar todo el código de la aplicación
 COPY . .
 
-# Inicializar Reflex (esto descarga las dependencias de Node y construye el frontend)
-RUN uv run reflex init
+# Inicializar Reflex y exportar sin SSR
+RUN uv run reflex init && \
+    uv run reflex export --frontend-only --no-ssr --no-zip
 
-# Exportar la aplicación para producción (genera frontend.zip)
-RUN uv run reflex export --frontend-only
+# Imagen final ligera solo con archivos estáticos
+FROM nginx:alpine
 
-# Descomprimir archivos estáticos en public/
-RUN unzip frontend.zip -d public && rm -f frontend.zip
+# Copiar archivos estáticos al directorio de nginx
+COPY --from=builder /app/.web/build/client /usr/share/nginx/html
+
+# Configuración de nginx para SPA
+RUN echo 'server { \
+    listen 80; \
+    server_name _; \
+    root /usr/share/nginx/html; \
+    index index.html; \
+    location / { \
+        try_files $uri $uri/ /index.html =404; \
+        add_header Cache-Control "no-cache"; \
+    } \
+    location /assets/ { \
+        expires 1y; \
+        add_header Cache-Control "public, immutable"; \
+    } \
+}' > /etc/nginx/conf.d/default.conf
 
 # Exponer el puerto
-EXPOSE 8000
+EXPOSE 80
 
-# Variables de entorno para producción
-ENV REFLEX_ENV=production
-
-# Comando para servir los archivos estáticos desde public/
-CMD ["python", "-m", "http.server", "8000", "--directory", "public"]
+# Nginx se ejecuta automáticamente
+CMD ["nginx", "-g", "daemon off;"]
